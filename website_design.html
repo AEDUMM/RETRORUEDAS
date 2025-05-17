@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RetroRuedas - Alquiler de Vehículos Clásicos</title>
+    <style>
+        :root {
+            --primary-color: #164a41;
+            --secondary-color: #4d774e;
+            --accent-color: #f1b24a;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light-color);
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
+        
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .tagline {
+            font-style: italic;
+            opacity: 0.9;
+        }
+        
+        nav {
+            background-color: var(--secondary-color);
+            padding: 1rem 0;
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin: 0 1rem;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+        
+        nav ul li a:hover {
+            opacity: 0.8;
+        }
+        
+        .hero {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+            background-size: cover;
+            background-position: center;
+            height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 2rem;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin-bottom: 2rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--dark-color);
+            padding: 0.8rem 1.8rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #e9a83a;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--primary-color);
+        }
+        
+        .section-title h2 {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .section-title p {
+            opacity: 0.8;
+        }
+        
+        .fleet {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .vehicle-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        
+        .vehicle-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .vehicle-img {
+            height: 200px;
+            width: 100%;
+            overflow: hidden;
+        }
+        
+        .vehicle-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .vehicle-card:hover .vehicle-img img {
+            transform: scale(1.05);
+        }
+        
+        .vehicle-info {
+            padding: 1.5rem;
+        }
+        
+        .vehicle-info h3 {
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+        
+        .vehicle-info p {
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+        
+        .vehicle-price {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+        }
+        
+        .price {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .services {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .service-card {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .service-icon {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+        
+        .service-card h3 {
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+        
+        .testimonials {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 4rem 0;
+            margin: 4rem 0;
+        }
+        
+        .testimonial-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .testimonial-text {
+            font-size: 1.3rem;
+            font-style: italic;
+            margin-bottom: 1.5rem;
+        }
+        
+        .testimonial-author {
+            font-weight: bold;
+        }
+        
+        .cta {
+            text-align: center;
+            background-color: var(--light-color);
+            padding: 4rem 0;
+        }
+        
+        .cta h2 {
+            font-size: 2.2rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+        }
+        
+        .cta p {
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+        
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+        
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 1.5rem;
+            color: var(--accent-color);
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-section ul li a {
+            color: white;
+            opacity: 0.8;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+        
+        .footer-section ul li a:hover {
+            opacity: 1;
+        }
+        
+        .footer-bottom {
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .footer-bottom p {
+            opacity: 0.7;
+        }
+        
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav ul li {
+                margin: 0.5rem 0;
+            }
+            
+            .hero {
+                height: 70vh;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Encabezado -->
+    <header>
+        <div class="logo">RetroRuedas</div>
+        <div class="tagline">Revive la emoción de épocas pasadas</div>
+    </header>
+    
+    <!-- Navegación -->
+    <nav>
+        <ul>
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#flota">Nuestra Flota</a></li>
+            <li><a href="#servicios">Servicios</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+        </ul>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="hero" id="inicio" style="background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/api/placeholder/800/400');">
+        <h1>Vehículos Clásicos para Momentos Especiales</h1>
+        <p>Ofrecemos alquiler de coches y motos clásicos para bodas, eventos, rodajes y sesiones fotográficas. Transporta a tus invitados o a tu audiencia a una época diferente.</p>
+        <a href="#contacto" class="btn">Reserva Ahora</a>
+    </section>
+    
+    <!-- Flota de Vehículos -->
+    <section id="flota" class="container">
+        <div class="section-title">
+            <h2>Nuestra Flota de Clásicos</h2>
+            <p>Descubre nuestros vehículos únicos y perfectamente conservados</p>
+        </div>
+        
+        <div class="fleet">
+            <!-- Vehículo 1 -->
+            <div class="vehicle-card">
+                <div class="vehicle-img">
+                    <img src="/api/placeholder/400/200" alt="Renault 18 GTS 1978">
+                </div>
+                <div class="vehicle-info">
+                    <h3>Renault 18 GTS (1978)</h3>
+                    <p>Coche avanzado para su época con detalles originales y extras únicos. Perfecto para bodas y eventos. Motor 1.6 gasolina en excepcional estado de marcha.</p>
+                    <ul>
+                        <li>Capacidad: 4 pasajeros</li>
+                        <li>Velocidad: 100 km/h</li>
+                        <li>Disponible todo el año</li>
+                    </ul>
+                    <div class="vehicle-price">
+                        <span>Desde</span>
+                        <span class="price">48€/hr</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Vehículo 2 -->
+            <div class="vehicle-card">
+                <div class="vehicle-img">
+                    <img src="/api/placeholder/400/200" alt="Renault 5 TS 1979">
+                </div>
+                <div class="vehicle-info">
+                    <h3>Renault 5 TS (1979)</h3>
+                    <p>Un icónico modelo raramente disponible y en condiciones excepcionales. Perfecto para sesiones fotográficas y rodajes. Motor 1.3 gasolina recién restaurado.</p>
+                    <ul>
+                        <li>Capacidad: 4 pasajeros</li>
+                        <li>Velocidad: 100 km/h</li>
+                        <li>Disponible todo el año</li>
+                    </ul>
+                    <div class="vehicle-price">
+                        <span>Desde</span>
+                        <span class="price">100€/hr</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Vehículo 3 -->
+            <div class="vehicle-card">
+                <div class="vehicle-img">
+                    <img src="/api/placeholder/400/200" alt="Suzuki Burgman 125 2002">
+                </div>
+                <div class="vehicle-info">
+                    <h3>Suzuki Burgman 125 (2002)</h3>
+                    <p>Mítica moto scooter de los 2000. Ideal para rodajes urbanos y sesiones de fotografía con un toque moderno pero nostálgico.</p>
+                    <ul>
+                        <li>Capacidad: 1 pasajero</li>
+                        <li>Velocidad: 90 km/h</li>
+                        <li>Disponible todo el año</li>
+                    </ul>
+                    <div class="vehicle-price">
+                        <span>Desde</span>
+                        <span class="price">40€/hr</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Servicios -->
+    <section id="servicios" class="container">
+        <div class="section-title">
+            <h2>Nuestros Servicios</h2>
+            <p>Ofrecemos diversas opciones para adaptarnos a tus necesidades</p>
+        </div>
+        
+        <div class="services">
+            <div class="service-card">
+                <div class="service-icon">💍</div>
+                <h3>Bodas y Eventos</h3>
+                <p>Haz que tu día especial sea aún más memorable con nuestros vehículos clásicos. Servicio con chófer incluido.</p>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">🎬</div>
+                <h3>Rodajes y Publicidad</h3>
+                <p>Vehículos de época para tus producciones audiovisuales, películas, series o anuncios publicitarios.</p>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">📸</div>
+                <h3>Sesiones Fotográficas</h3>
+                <p>El complemento perfecto para tus sesiones de fotos temáticas o de moda con un toque retro.</p>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">🎉</div>
+                <h3>Eventos Especiales</h3>
+                <p>Comuniones, bautizos, despedidas de soltero o cualquier celebración que quieras hacer única.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Testimonios -->
+    <section class="testimonials">
+        <div class="testimonial-container">
+            <div class="section-title" style="color: white;">
+                <h2>Lo Que Dicen Nuestros Clientes</h2>
+            </div>
+            <div class="testimonial-text">
+                "El Renault 18 GTS fue la estrella de nuestra boda. El servicio fue impecable y Eduardo estuvo pendiente de todos los detalles. Sin duda una experiencia que recordaremos siempre."
+            </div>
+            <div class="testimonial-author">— María y Carlos, Zaragoza</div>
+        </div>
+    </section>
+    
+    <!-- Llamada a la Acción -->
+    <section class="cta">
+        <div class="container">
+            <h2>¿Listo para viajar al pasado?</h2>
+            <p>Contacta con nosotros para reservar tu vehículo clásico y hacer de tu evento algo inolvidable.</p>
+            <a href="#contacto" class="btn">Reserva Ahora</a>
+        </div>
+    </section>
+    
+    <!-- Contacto y Footer -->
+    <footer id="contacto">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>RetroRuedas</h3>
+                <p>Alquiler de vehículos clásicos para eventos, rodajes y ocasiones especiales.</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Contacto</h3>
+                <ul>
+                    <li>Eduardo Monclús</li>
+                    <li>Teléfono: +34 722 400 422</li>
+                    <li>Email: info@retroruedas.es</li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Enlaces Rápidos</h3>
+                <ul>
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#flota">Nuestra Flota</a></li>
+                    <li><a href="#servicios">Servicios</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Disponibilidad</h3>
+                <p>Disponible todo el año en toda España. Consulta disponibilidad y fechas.</p>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 RetroRuedas. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+</body>
+</html>
